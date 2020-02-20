@@ -93,6 +93,14 @@ void init_camera(){
 	for (int i = 0; i < CAMERA_WIDTH * CAMERA_HEIGHT * 2; i++){
 		rgb565[i] = 0;
 	}
+	
+	// create dir images
+    struct stat st = {0};
+
+    if (stat("./images", &st) == -1) {
+        mkdir("./images", 0700);
+    }
+
 }
 
 void disable_camera(){
@@ -259,6 +267,33 @@ void disable_led(int led_position){
 }
 
 
+void enable_body_led(void){
+
+	// Shift 1 to the position of the current LED (binary representation), then bitwise OR it with current LEDs value
+	command[7] = command[7] | 1 << 4;
+}
+
+void disable_body_led(void){
+
+	// Shift 0 to the position of the led, 1 otherwise. Then bitwise AND with previous value to force that one led to 0.
+	uint mask = ~(1 << 4);
+	command[7] = command[7] & mask;
+}
+
+void enable_front_led(void){
+
+	// Shift 1 to the position of the current LED (binary representation), then bitwise OR it with current LEDs value
+	command[7] = command[7] | 1 << 5;
+}
+
+void disable_front_led(void){
+
+	// Shift 0 to the position of the led, 1 otherwise. Then bitwise AND with previous value to force that one led to 0.
+	uint mask = ~(1 << 5);
+	command[7] = command[7] & mask;
+}
+
+
 
 
 // get the correction values for prox sensors
@@ -273,7 +308,7 @@ void calibrate_prox() {
     prox_corr[i] = 0;
   }
 
-  printf("calibrating...\n");
+  printf("calibrating proximity ...");
 
   for (i=0; i<LED_COUNT; i++) {
     toggle_led(i);
@@ -299,8 +334,11 @@ void calibrate_prox() {
   for (i=0; i<LED_COUNT; i++) {
     toggle_led(i);
   }
-  printf("\n... done calibration\n");
+  printf(" done calibration\n");
 }
+
+
+
 
 
 void get_prox(short int *prox_values) {
@@ -314,6 +352,7 @@ void get_prox(short int *prox_values) {
 	prox_values[PROX_LEFT_FRONT_DIAG] = *(short int *)(&sensor[49]);
 	prox_values[PROX_LEFT_FRONT] = *(short int *)(&sensor[51]);
 }
+
 
 void get_prox_calibrated(short int *prox_values) {
     short int diff;
@@ -335,6 +374,88 @@ void get_prox_calibrated(short int *prox_values) {
     diff = *(short int *)(&sensor[51]) -  prox_corr[PROX_LEFT_FRONT];
 	prox_values[PROX_LEFT_FRONT] = diff < 0 ? 0 : diff;
 }
+
+
+
+
+
+// get the correction values for light sensors
+short int light_corr[PROX_SENSORS_COUNT];
+
+void calibrate_light() {
+  int i, j;
+  short int tmp[PROX_SENSORS_COUNT];
+ 
+  // init array for calibration values  
+  for (i=0; i<PROX_SENSORS_COUNT; i++) {
+    light_corr[i] = 0;
+  }
+
+  printf("calibrating light ...");
+
+  for (i=0; i<LED_COUNT; i+=2) {
+    toggle_led(i);
+  }
+
+  // get multiple readings for each sensor
+  for (j=0; j<(NBR_CALIB+OFFSET_CALIB) && robot_go_on(); j++) {  
+    if (j >= OFFSET_CALIB) {
+        
+        get_light(tmp);
+        for (i=0; i<PROX_SENSORS_COUNT; i++) {
+            light_corr[i] += tmp[i];
+        }
+    }
+  }
+  
+  // calculate average for each sensor
+  for (i=0; i<PROX_SENSORS_COUNT; i++) {
+    light_corr[i] = light_corr[i] / NBR_CALIB;
+    printf("%d ",light_corr[i]);
+  }
+  
+  for (i=0; i<LED_COUNT; i++) {
+    toggle_led(i);
+  }
+  printf(" done calibration\n");
+}
+
+
+
+
+void get_light(short int *light_values) {
+	light_values[PROX_RIGHT_FRONT] = *(short int *)(&sensor[53]);
+	light_values[PROX_RIGHT_FRONT_DIAG] = *(short int *)(&sensor[55]);
+	light_values[PROX_RIGHT_SIDE] = *(short int *)(&sensor[57]);
+	light_values[PROX_RIGHT_BACK] = *(short int *)(&sensor[59]);
+
+	light_values[PROX_LEFT_BACK] = *(short int *)(&sensor[61]);
+	light_values[PROX_LEFT_SIDE] = *(short int *)(&sensor[63]);
+	light_values[PROX_LEFT_FRONT_DIAG] = *(short int *)(&sensor[65]);
+	light_values[PROX_LEFT_FRONT] = *(short int *)(&sensor[67]);
+}
+
+void get_light_calibrated(short int *light_values) {
+    short int diff;
+    diff = *(short int *)(&sensor[53]) -  light_corr[PROX_RIGHT_FRONT];
+	light_values[PROX_RIGHT_FRONT] = diff < 0 ? 0 : diff;
+    diff = *(short int *)(&sensor[55]) -  light_corr[PROX_RIGHT_FRONT_DIAG];
+	light_values[PROX_RIGHT_FRONT_DIAG] = diff < 0 ? 0 : diff;
+    diff = *(short int *)(&sensor[57]) -  light_corr[PROX_RIGHT_SIDE];
+	light_values[PROX_RIGHT_SIDE] = diff < 0 ? 0 : diff;
+    diff = *(short int *)(&sensor[59]) -  light_corr[PROX_RIGHT_BACK];
+	light_values[PROX_RIGHT_BACK] = diff < 0 ? 0 : diff;
+
+    diff = *(short int *)(&sensor[61]) -  light_corr[PROX_LEFT_BACK];
+	light_values[PROX_LEFT_BACK] = diff < 0 ? 0 : diff;
+    diff = *(short int *)(&sensor[63]) -  light_corr[PROX_LEFT_SIDE];
+	light_values[PROX_LEFT_SIDE] = diff < 0 ? 0 : diff;
+    diff = *(short int *)(&sensor[65]) -  light_corr[PROX_LEFT_FRONT_DIAG];
+	light_values[PROX_LEFT_FRONT_DIAG] = diff < 0 ? 0 : diff;
+    diff = *(short int *)(&sensor[67]) -  light_corr[PROX_LEFT_FRONT];
+	light_values[PROX_LEFT_FRONT] = diff < 0 ? 0 : diff;
+}
+
 
 
 
@@ -367,6 +488,8 @@ void rgb565_to_bgr888(const unsigned char *rgb565, unsigned char *bgr888, int wi
 void save_bmp_image(const unsigned char *image) {
 	static int image_counter = 0;
 	char filename[32];
+	
+	
 	sprintf(filename, "images/image%03d.bmp", image_counter++);
 
 	int width = CAMERA_WIDTH;
@@ -428,6 +551,125 @@ void get_camera(unsigned char *red, unsigned char *green, unsigned char *blue) {
 		blue[i] = bgr888[3 * i];
 	}
 }
+
+
+
+
+/*
+// get inclination values
+void get_inclination(unsigned char *inclination_values) { //8-bits value
+	inclination_values[INCLINATION_FRONT] = *(unsigned char *)(&sensor[14]);
+	inclination_values[INCLINATION_RIGHT] = *(unsigned char *)(&sensor[15]);
+	inclination_values[INCLINATION_BACK] = *(unsigned char *)(&sensor[16]);
+	inclination_values[INCLINATION_LEFT] = *(unsigned char *)(&sensor[17]);
+}
+*/
+
+// //////////////
+// temperature sensor (credits: Jonas Fontana)
+
+
+// get temperature
+void get_temp(unsigned char *temp) {
+	temp[0] = *(unsigned char *)(&sensor[36]);
+}
+
+
+// //////////////
+// time-of-flight sensor (credits: Jonas Fontana)
+
+// get distance given in millimeters
+void get_tof(short int *tof_distance) {
+	tof_distance[0] = *(short int *)(&sensor[69]);
+}
+
+
+// //////////////
+// accelerometer values (credits: Jonas Fontana)
+
+// get gyro
+void get_gyro_axes( short *gyro) {
+	gyro[AXES_X] = *( short *)(&sensor[18]);
+	gyro[AXES_Y] = *( short *)(&sensor[20]);
+	gyro[AXES_Z] = *( short *)(&sensor[22]);
+}
+
+
+// get orientation
+void get_orientation(float *orientation) {
+	orientation[0] = *(float *)(&sensor[10]);
+}
+
+// get inclination
+void get_inclination(float *inclination) {
+	inclination[0] = *(float *)(&sensor[14]);
+}
+
+
+
+// get acceleration
+void get_acceleration(float *acceleration) {
+	acceleration[0] = *(float *)(&sensor[6]);
+}
+
+// get acceleration
+void get_acceleration_axes(short int *acceleration) {
+	acceleration[AXES_Y] = *(short int *)(&sensor[0]);
+	acceleration[AXES_X] = *(short int *)(&sensor[2]);
+	acceleration[AXES_Z] = *(short int *)(&sensor[4]);
+}
+
+
+
+
+
+
+// //////////////
+// playing sound (credits: Jonas Fontana)
+
+
+// play one of the default sounds
+void play_sound(int sound) {
+		switch (sound)
+		{
+			case 0 :								//MARIO
+				command[20] = 0x01;
+				break;
+
+			case 1 :								//UNDERWORLD
+				command[20] = 0x02;
+				break;
+
+			case 2 :								//STARWARS
+				command[20] = 0x04;
+				break;
+
+			case 3 :								//4KHz
+				command[20] = 0x08;
+				break;
+
+			case 4 :								//10KHz
+				command[20] = 0x10;
+				break;
+
+			default:
+				break;
+		}
+}
+
+// stop sound
+void stop_sound(void) {
+	command[20] = 0x20;
+}
+
+void get_microphones(short int *soundlevels) {
+	soundlevels[MICROPHONE_RIGHT] = *(short int *)(&sensor[71]);
+	soundlevels[MICROPHONE_LEFT] = *(short int *)(&sensor[73]);
+	soundlevels[MICROPHONE_BACK] = *(short int *)(&sensor[75]);
+	soundlevels[MICROPHONE_FRONT] = *(short int *)(&sensor[77]);
+}
+
+
 
 
 // //////////////
@@ -543,11 +785,10 @@ void disable_communication() {
 }
 
 void send_msg_to_Q(const char *msg, int qid) {
-  if (DEBUG) printf("msg %s\n",msg);
+  //printf("%s\n",msg);
   message.mtype = COM_CHANNEL;
   strcpy(message.text,msg);
-  if (DEBUG) printf("message.text %s\n",message.text);
-  
+  //printf("%s\n",message.text);
   msgsnd(qid, &message, sizeof(message), IPC_NOWAIT); 
 }
 
@@ -555,10 +796,8 @@ void send_msg_to_Q(const char *msg, int qid) {
 void send_msg(const char *msg) {
   // broadcast to all other queues
   for (int i=1;i<queues[0]+1;i++) {
-    if (queues[i] != msgid) {
-      if (DEBUG) printf("send to queue %d\n",queues[i]);
+    if (queues[i] != msgid)
       send_msg_to_Q(msg,queues[i]);
-    }
   }
 }
 
@@ -569,9 +808,9 @@ void receive_msg(char* buffer) {
   
     if (msgrcv(msgid, &message, sizeof(message), COM_CHANNEL, IPC_NOWAIT) >= 0) {
         strcpy(buffer,message.text);
-        if (DEBUG) printf("recv message.text %s\n",message.text);
+        //printf("%s\n",message.text);
     }
-    if (DEBUG) printf("rcv buffer %s\n",buffer);
+    //printf("%s\n",buffer);
 }
 
 

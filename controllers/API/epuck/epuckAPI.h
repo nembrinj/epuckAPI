@@ -16,6 +16,10 @@
 #include <sys/msg.h> 
 #include <sys/shm.h> 
 
+// to create dir
+#include <sys/stat.h>
+#include <unistd.h>
+
 #include <string.h>
 
 #define DEBUG 0
@@ -43,6 +47,13 @@ void toggle_led(int led_position);
 void disable_led(int led_position);
 void enable_led(int led_position);
 
+void enable_body_led(void);
+void disable_body_led(void);
+
+void enable_front_led(void);
+void disable_front_led(void);
+
+
 /*** ROBOT CONTROL end ***/
 
 
@@ -66,6 +77,11 @@ void enable_led(int led_position);
 void get_prox(short int *prox_values);
 void get_prox_calibrated(short int *prox_values);
 void calibrate_prox();
+
+void get_light(short int *prox_values);
+void get_light_calibrated(short int *prox_values);
+void calibrate_light();
+
 /*** PROXIMITY SENSORS end ***/
 
 
@@ -88,6 +104,76 @@ void get_camera(unsigned char *red, unsigned char *green, unsigned char *blue);
 void init_camera();
 void disable_camera();
 /*** CAMERA end ***/
+
+
+
+
+/*** TEMPERATURE start ***/
+
+#define TEMP_SENSOR_COUNT 1
+void get_temp(unsigned char *temp);
+
+/*** TEMPERATURE stop ***/
+
+/*** TOF start ***/
+
+#define TOF_SENSOR_COUNT 1
+void get_tof(short int *tof_distance);
+
+/*** TOF stop ***/
+
+/*** ACCELEROMETER start ***/
+
+
+#define AXES_X 0
+#define AXES_Y 1
+#define AXES_Z 2
+
+// instantaneous rotational speed for each axis 
+#define GYRO_SENSOR_COUNT 3
+void get_gyro_axes( short *gyro);
+
+
+// planar orientation of acceleration vector (relative to robot)
+#define ORIENT_SENSOR_COUNT 1
+void get_orientation(float *orientation);
+
+// inclination to vertical of acceleration vector  
+#define INCLIN_SENSOR_COUNT 1
+void get_inclination(float *inclination);
+
+// magnitude of acceleration vector  
+#define ACC_SENSOR_COUNT 1
+void get_acceleration(float *acceleration);
+
+// raw acceleration values for each axis
+#define ACC_RAW_SENSOR_COUNT 3
+void get_acceleration_axes(short int *acceleration);
+
+/*** ACCELEROMETER stop ***/
+
+
+
+
+
+
+/*** SOUND start ***/
+
+void play_sound(int sound);
+void stop_sound(void);
+
+#define MICROPHONE_COUNT 4
+
+#define MICROPHONE_FRONT 0
+#define MICROPHONE_RIGHT 1
+#define MICROPHONE_BACK 2
+#define MICROPHONE_LEFT 3
+
+void get_microphones(short int *soundlevels);
+
+
+/*** SOUND stop ***/
+
 
 
 /*** COMMUNICATION start ***/
