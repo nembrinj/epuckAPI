@@ -18,13 +18,16 @@ void robot_loop() {
 
     while (robot_go_on()) {
 
+        // fetch proximity sensor values 
         get_prox_calibrated(prox_values);
+        
+        // basic love behavior
+        double prox_front = (prox_values[PROX_RIGHT_FRONT] + prox_values[PROX_LEFT_FRONT]) / 2.;
+        double ds = - (NORM_SPEED * prox_front) / MAX_PROX;
+        double speed = NORM_SPEED + ds;
 
-        double prox = (prox_values[7] + prox_values[0]) / 2.;
-        double ds = (NORM_SPEED * prox) / MAX_PROX;
-        double speed = bounded_speed(NORM_SPEED - ds);
-
-        set_speed(speed, speed);
+        // make sure speed values are legal
+        set_speed(bounded_speed(speed),bounded_speed(speed));
     }
     cleanup_robot();
 }
