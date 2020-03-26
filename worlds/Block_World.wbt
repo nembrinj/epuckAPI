@@ -1,0 +1,200 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  info [
+    "The model of the E-puck robot"
+  ]
+  title "E-puck simulation"
+}
+Viewpoint {
+  fieldOfView 0.7
+  orientation 1 0 0 4.71238898038469
+  position 0.020397076479171286 3.650111230316461 -0.027460238821775396
+}
+Background {
+  skyColor [
+    0.7 0.7 0.7
+  ]
+}
+DEF LIGHTS Group {
+  children [
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 10
+          location -0.4 0.4 0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 10
+          location 0 0.4 0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 10
+          location 0.4 0.4 0.8
+        }
+      ]
+    }
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location -0.4 0.4 0.4
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location 0 0.4 0.4
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location 0.4 0.4 0.4
+        }
+      ]
+    }
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location -0.4 0.4 0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location 0 0.4 0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location 0.4 0.4 0.8
+        }
+      ]
+    }
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location -0.4 0.4 0
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location 0 0.4 0
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location 0.4 0.4 0
+        }
+      ]
+    }
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location -0.4 0.4 -0.4
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location 0 0.4 -0.4
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 4
+          location 0.4 0.4 -0.4
+        }
+      ]
+    }
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 10
+          location -0.4 0.4 -0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 10
+          location 0 0.4 -0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          intensity 10
+          location 0.4 0.4 -0.8
+        }
+      ]
+    }
+  ]
+}
+RectangleArena {
+  floorSize 0.8 1.6
+  floorTileSize 0.8 1.6
+  floorAppearance Appearance {
+    texture ImageTexture {
+      url [
+        "textures/floor.png"
+      ]
+    }
+  }
+  wallAppearance Appearance {
+    texture ImageTexture {
+      url [
+        "textures/wall.png"
+      ]
+    }
+  }
+  floorTextureUrl []
+  wallTextureUrl []
+}
+E-puck {
+  translation -0.00285857956279054 0 -0.1964066083087184
+  rotation 0 -1 0 7.884953353001448e-08
+  name "e-puck0"
+  controller "APItest"
+  version "2"
+  camera_width 160
+  camera_height 120
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+SolidBox {
+  translation -0.01995510312117133 0.05 -0.6699680557468219
+  rotation 0 1 0 3.141496322
+  size 0.1 0.1 0.02
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.8 0.3 0.3
+    }
+  }
+}
+SolidBox {
+  translation -0.020070701028744288 0.05 0.530031938685313
+  rotation 0 1 0 3.141496322
+  name "box(1)"
+  size 0.1 0.1 0.02
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.3 0.3 0.8
+    }
+  }
+}
+SolidBox {
+  translation -0.32002253384181745 0.05 0.030003040089894687
+  rotation 0 1 0 4.712292644000001
+  name "box(2)"
+  size 0.1 0.1 0.02
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.3 0.8 0.3
+    }
+  }
+}
