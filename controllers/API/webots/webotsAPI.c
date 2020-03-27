@@ -176,7 +176,11 @@ void init_camera() {
   struct stat st = {0};
 
   if (stat("./images", &st) == -1) {
-    mkdir("./images", 0700);
+    #if defined(_WIN32)
+      mkdir("./images");
+    #else
+      mkdir("./images", 0700);
+    #endif
   }
 
 }
