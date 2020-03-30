@@ -8,7 +8,8 @@ WorldInfo {
 Viewpoint {
   fieldOfView 0.7
   orientation 1 0 0 4.71238898038469
-  position 0.020397076479171286 3.650111230316461 -0.027460238821775396
+  position 0.020397076479171286 1.500399862712594 -0.027460238821774997
+  follow "e-puck0"
 }
 Background {
   skyColor [
@@ -21,17 +22,14 @@ DEF LIGHTS Group {
       children [
         PointLight {
           attenuation 0 0 12.56
-          intensity 10
           location -0.4 0.4 0.8
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 10
           location 0 0.4 0.8
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 10
           location 0.4 0.4 0.8
         }
       ]
@@ -40,17 +38,14 @@ DEF LIGHTS Group {
       children [
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location -0.4 0.4 0.4
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location 0 0.4 0.4
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location 0.4 0.4 0.4
         }
       ]
@@ -59,17 +54,14 @@ DEF LIGHTS Group {
       children [
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location -0.4 0.4 0.8
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location 0 0.4 0.8
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location 0.4 0.4 0.8
         }
       ]
@@ -78,17 +70,14 @@ DEF LIGHTS Group {
       children [
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location -0.4 0.4 0
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location 0 0.4 0
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location 0.4 0.4 0
         }
       ]
@@ -97,17 +86,14 @@ DEF LIGHTS Group {
       children [
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location -0.4 0.4 -0.4
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location 0 0.4 -0.4
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 4
           location 0.4 0.4 -0.4
         }
       ]
@@ -116,17 +102,14 @@ DEF LIGHTS Group {
       children [
         PointLight {
           attenuation 0 0 12.56
-          intensity 10
           location -0.4 0.4 -0.8
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 10
           location 0 0.4 -0.8
         }
         PointLight {
           attenuation 0 0 12.56
-          intensity 10
           location 0.4 0.4 -0.8
         }
       ]
