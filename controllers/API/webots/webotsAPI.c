@@ -38,14 +38,14 @@ void set_speed(double left, double right) {
 // /////////////
 // LEDs
 
-const char *led_names[LED_COUNT] =   {"led1", "led3", "led5", "led7"};
+const char *led_names[LED_COUNT+2] =   {"led0", "led2", "led4", "led6","led8","led9"};
 //  {"led0", "led1", "led2", "led3","led4", "led5", "led6", "led7"};
-WbDeviceTag led_tags[LED_COUNT];
+WbDeviceTag led_tags[LED_COUNT+2];
 
 void init_led(){  
   int i;
   // init leds
-  for (i=0;  i<LED_COUNT; i++) {
+  for (i=0;  i<LED_COUNT+2; i++) {
     led_tags[i] = wb_robot_get_device(led_names[i]);
   }
 }
@@ -62,6 +62,47 @@ void enable_led(int led_position){
 void disable_led(int led_position){
   wb_led_set(led_tags[led_position], 0);
 }
+
+void enable_body_led() {
+  wb_led_set(led_tags[4], 1);
+}
+
+void disable_body_led() {
+  wb_led_set(led_tags[4], 0);
+}
+
+void enable_front_led() {
+  wb_led_set(led_tags[5], 1);
+}
+
+void disable_front_led() {
+  wb_led_set(led_tags[5], 0);
+}
+
+
+const char *rgbled_names[LED_COUNT] =   {"led1", "led3", "led5", "led7"};
+//  {"led0", "led1", "led2", "led3","led4", "led5", "led6", "led7"};
+WbDeviceTag rgbled_tags[LED_COUNT];
+
+void init_rgbled(){  
+  int i;
+  // init leds
+  for (i=0;  i<LED_COUNT; i++) {
+    rgbled_tags[i] = wb_robot_get_device(rgbled_names[i]);
+  }
+}
+
+void enable_rgbled(int led_position, int led_color){
+  wb_led_set(rgbled_tags[led_position], led_color);
+}
+
+void disable_rgbled(int led_position){
+  wb_led_set(rgbled_tags[led_position], 0);
+}
+
+
+
+
 
 
 // /////////////
@@ -445,6 +486,7 @@ void init_robot() {
   wb_robot_init();
   init_motor();
   init_led();
+  init_rgbled();
 }
 
 void init_sensors() {

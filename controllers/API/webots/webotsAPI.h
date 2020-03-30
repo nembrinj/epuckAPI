@@ -35,6 +35,15 @@ void toggle_led(int led_position);
 void disable_led(int led_position);
 void enable_led(int led_position);
 
+void enable_body_led(void);
+void disable_body_led(void);
+
+void enable_front_led(void);
+void disable_front_led(void);
+
+void enable_rgbled(int led_position, int led_color);
+void disable_rgbled(int led_position);
+
 /*** ROBOT CONTROL end ***/
 
 
