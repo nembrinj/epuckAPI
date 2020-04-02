@@ -474,7 +474,7 @@ void receive_msg(char* buffer) {
 
 }
 
-\\ thanks to Daniel Borcard
+// thanks to Daniel Borcard
 int get_robot_ID() {
     int a;
     // parse robot name
