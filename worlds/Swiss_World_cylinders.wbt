@@ -1,0 +1,665 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  info [
+    "The model of the E-puck robot"
+  ]
+  title "E-puck simulation"
+}
+Viewpoint {
+  fieldOfView 0.7
+  orientation 1 0 0 4.71238898038469
+  position 0.02391793339057297 2.552791836221457 0.0112691872036433
+}
+Background {
+  skyColor [
+    0.7 0.7 0.7
+  ]
+}
+DEF LIGHTS Group {
+  children [
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          location -0.4 0.4 0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0 0.4 0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0.4 0.4 0.8
+        }
+      ]
+    }
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          location -0.4 0.4 0.4
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0 0.4 0.4
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0.4 0.4 0.4
+        }
+      ]
+    }
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          location -0.4 0.4 0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0 0.4 0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0.4 0.4 0.8
+        }
+      ]
+    }
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          location -0.4 0.4 0
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0 0.4 0
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0.4 0.4 0
+        }
+      ]
+    }
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          location -0.4 0.4 -0.4
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0 0.4 -0.4
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0.4 0.4 -0.4
+        }
+      ]
+    }
+    Group {
+      children [
+        PointLight {
+          attenuation 0 0 12.56
+          location -0.4 0.4 -0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0 0.4 -0.8
+        }
+        PointLight {
+          attenuation 0 0 12.56
+          location 0.4 0.4 -0.8
+        }
+      ]
+    }
+  ]
+}
+Robot {
+  controller "S03_swiss_super"
+  supervisor TRUE
+}
+RectangleArena {
+  floorSize 1.2 1.2
+  floorAppearance NULL
+}
+DEF EP1 E-puck {
+  translation -0.00285857956279054 0 -0.1964066083087184
+  rotation 0 1 0 3.14159
+  name "e-puck0"
+  controller "S03_swiss_explorer"
+  version "2"
+  camera_width 160
+  camera_height 120
+  distance_sensor_numberOfRays 2
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+DEF EP2 E-puck {
+  translation 0.247141 0 0.123593
+  rotation 0 -1 0 7.884953353001448e-08
+  name "e-puck0(5)"
+  controller "S03_swiss_explorer"
+  version "2"
+  camera_width 160
+  camera_height 120
+  distance_sensor_numberOfRays 2
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+DEF EP3 E-puck {
+  translation -0.062859 0 0.403593
+  rotation 0 -1 0 7.884953353001448e-08
+  name "e-puck0(6)"
+  controller "S03_swiss_explorer"
+  version "2"
+  camera_width 160
+  camera_height 120
+  distance_sensor_numberOfRays 2
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+DEF EP4 E-puck {
+  translation 0.037141 0 0.043593
+  rotation 0 -1 0 7.884953353001448e-08
+  name "e-puck0(7)"
+  controller "S03_swiss_explorer"
+  version "2"
+  camera_width 160
+  camera_height 120
+  distance_sensor_numberOfRays 2
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+DEF BLOCK1 Solid {
+  translation -0.13 0 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.2 0.2 0.2
+        }
+      }
+      geometry Cylinder {
+        height 0.05
+        radius 0.025
+      }
+    }
+  ]
+  name "block1"
+  boundingObject Cylinder {
+    height 0.05
+    radius 0.025
+  }
+  physics Physics {
+    density 100
+  }
+}
+Group {
+  children [
+    DEF BLOCK2 Solid {
+      translation -0.06 0 -0.3
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(1)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK3 Solid {
+      translation 0.36 0 -0.04
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(10)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK4 Solid {
+      translation -0.18 0 -0.29
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(11)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK5 Solid {
+      translation -0.01 0 -0.05
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(12)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK6 Solid {
+      translation 0.04 0 0.32
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(13)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK7 Solid {
+      translation 0.07 0 0.16
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(14)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK8 Solid {
+      translation -0.33 0 -0.08
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(15)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK9 Solid {
+      translation -0.34 0 0.22
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(16)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK10 Solid {
+      translation -0.27 0 0.36
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(17)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK11 Solid {
+      translation -0.06 0 -0.44
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(18)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK12 Solid {
+      translation 0.11 0 -0.35
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(19)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK13 Solid {
+      translation -0.05 0 0.17
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(2)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK14 Solid {
+      translation 0.18 0 0.36
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(3)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK15 Solid {
+      translation -0.26 0 0.07
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(4)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK16 Solid {
+      translation 0.24 0 -0.39
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(5)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK17 Solid {
+      translation -0.13 0 0.16
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(6)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK18 Solid {
+      translation -0.27 0 -0.2
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(7)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK19 Solid {
+      translation 0.32 0 -0.17
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(8)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+    DEF BLOCK20 Solid {
+      translation 0.12 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.2
+            }
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.025
+          }
+        }
+      ]
+      name "solid(9)"
+      boundingObject Cylinder {
+        height 0.05
+        radius 0.025
+      }
+      physics Physics {
+        density 100
+      }
+    }
+  ]
+}

@@ -8,8 +8,7 @@ WorldInfo {
 Viewpoint {
   fieldOfView 0.7
   orientation 1 0 0 4.71238898038469
-  position 0.020397076479171286 1.500399862712594 -0.027460238821774997
-  follow "e-puck0"
+  position 0.020397076479171286 3.650111230316461 -0.027460238821775396
 }
 Background {
   skyColor [
@@ -122,7 +121,7 @@ RectangleArena {
   floorAppearance Appearance {
     texture ImageTexture {
       url [
-        "textures/floor.png"
+        "textures/floor_task.png"
       ]
     }
   }
@@ -150,7 +149,7 @@ E-puck {
   ]
 }
 SolidBox {
-  translation -0.01995510312117133 0.05 -0.6699680557468219
+  translation 0.199998 0.05 -0.199946
   rotation 0 1 0 3.141496322
   size 0.1 0.1 0.02
   appearance Appearance {
@@ -160,7 +159,7 @@ SolidBox {
   }
 }
 SolidBox {
-  translation -0.020070701028744288 0.05 0.530031938685313
+  translation -0.19002 0.05 0.020015
   rotation 0 1 0 3.141496322
   name "box(1)"
   size 0.1 0.1 0.02
@@ -171,7 +170,7 @@ SolidBox {
   }
 }
 SolidBox {
-  translation -0.32002253384181745 0.05 0.030003040089894687
+  translation -4.61213e-05 0.05 0.270034
   rotation 0 1 0 4.712292644000001
   name "box(2)"
   size 0.1 0.1 0.02
