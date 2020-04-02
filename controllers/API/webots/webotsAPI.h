@@ -16,6 +16,7 @@
 void init_robot();
 void init_sensors();
 void disable_sensors();
+int get_robot_ID();
 
 void cleanup_robot();
 

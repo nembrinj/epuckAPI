@@ -474,7 +474,16 @@ void receive_msg(char* buffer) {
 
 }
 
-
+\\ thanks to Daniel Borcard
+int get_robot_ID() {
+    int a;
+    // parse robot name
+    if (sscanf(wb_robot_get_name(), "%i",&a) < 1) {
+        printf("please provide a valid name\n");
+        return -1;
+    }
+    else return a;
+}
 
 
 

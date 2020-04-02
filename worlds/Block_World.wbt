@@ -140,7 +140,7 @@ E-puck {
   translation -0.00285857956279054 0 -0.1964066083087184
   rotation 0 -1 0 7.884953353001448e-08
   name "e-puck0"
-  controller "APItest"
+  controller "S03_camera_record"
   version "2"
   camera_width 160
   camera_height 120
